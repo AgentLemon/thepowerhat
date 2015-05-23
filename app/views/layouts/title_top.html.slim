@@ -1,0 +1,34 @@
+- if mobile_device?
+  .title-container.stub.invisible
+  .title-container
+    .content-container.panel-container.mobile
+      = render partial: "layouts/title"
+
+  .content-container.loading-global-wrap.mobile
+    .loading-global
+      | Loading...
+
+  .content-container.page-content.mobile
+    .menu-col.left
+      = render partial: "layouts/vertical_menu_left"
+    .menu-col.right
+      = render partial: "layouts/vertical_menu_right"
+    .page-col
+      = yield
+
+- else
+  .title-container.stub
+    .content-container.panel-container
+      = render "layouts/title"
+
+  .content-container.loading-global-wrap
+    .loading-global
+      | Loading...
+
+  .content-container.page-content
+    .menu-col.left.animated-move
+      = render partial: "layouts/vertical_menu_left"
+    .menu-col.right.animated-move
+      = render partial: "layouts/vertical_menu_right"
+    .page-col.animated-move
+      = yield

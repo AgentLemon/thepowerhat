@@ -1,0 +1,123 @@
+.item-container.with-bottom-line
+  .input-group activate-on-link=true
+    input.form-control name="search" id="search" placeholder="Search" ng-model="search" ng-keypress="$event.keyCode == 13 ? newSearch() : null" ng-tags-highlight=true
+    span.input-group-btn
+      button.btn.btn-primary ng-click="newSearch()"
+        span.glyphicon.glyphicon-search
+
+.item-container.with-bottom-line.full-size-btn-wrap
+  button class="btn btn-link full-size-btn" ng-click="new()" Add Party
+
+.item-container.budget.with-bottom-line
+  .post-wrap.budget-post.total-debt
+    .total Total:
+    .amount ng-class="{ paid: totalDebt > 0, debt: totalDebt < 0 }"
+      | {{formatPayment(formatCurrency(totalDebt)[0])}}
+      span.cents
+        | {{formatCurrency(totalDebt)[1]}}
+    .debts-container.row
+      .debt-item.party-members-show.col-xs-6.mobile-screen-width ng-repeat="debt in debts" ng-hide="debt.amount == 0"
+        .member-avatar-wrap
+          img.member-avatar ng-src="{{debt.avatar_url}}"
+          .member-overlay
+          span.member-name
+            | {{debt.username}}
+        .amount ng-class="{ paid: debt.amount > 0, debt: debt.amount < 0 }"
+          span.arrow
+            | {{getArrow(debt.amount)}}
+          | {{formatCurrency(debt.amount, { abs: true })[0]}}
+          span.cents
+            | {{formatCurrency(debt.amount)[1]}}
+
+.item-container.no-items ng-if="noItems()"
+  span.glyphicon.glyphicon-question-sign
+  .no-items-sign No items here
+
+.item-container.budget.with-bottom-line ng-repeat="party in collection"
+  .post-wrap.budget-post ng-show-on-screen="{{party.isNew()}}"
+    .moveable-container.animated-move ng-class="{ moved: party.isMoved }" ng-click="move(party)" ng-hide="party.isEdited"
+      .date-container
+        .date-wrap
+          .date ng-bind-html="formatDate(party.date, { lineBreak: true })"
+      .tags-and-members
+        .party-members-show
+          .member-avatar-wrap ng-repeat="member in party.party_members_attributes"
+            img.member-avatar ng-src="{{member.avatar_url}}"
+            .member-overlay
+            span.member-payment.paid ng-if="member.paid > 0"
+              | {{formatPayment(member.paid)}}
+            span.member-payment.debt ng-if="member.debt > 0"
+              | {{formatPayment(-member.debt)}}
+            span.member-name
+              | {{member.username}}
+        .party-tags ng-bind-html="party.tags_line_formatted"
+      .amount
+        .paid ng-if="party.paid > 0"
+          | {{formatPayment(formatCurrency(party.paid)[0])}}
+          span.cents
+            | {{formatCurrency(party.paid)[1]}}
+        .debt ng-if="party.debt > 0"
+          | {{formatPayment(formatCurrency(-party.debt)[0])}}
+          span.cents
+            | {{formatCurrency(party.debt)[1]}}
+      .moveable-buttons
+        button.btn.btn-danger ng-click="delete(party)" Delete
+        button.btn.btn-success ng-click="edit(party)" Edit
+
+  .edit-container.party-container ng-show="party.isEdited"
+    .row
+      .form-group.col-xs-3.mobile-screen-width
+        .input-with-label-wrap
+          label for="date" Date
+          span.date-presenter
+            | {{formatDate(party.date)}}
+          input type="date" class="form-control styled-field" ng-model="party.date" name="date" id="date"
+      .form-group.col-xs-9.mobile-screen-width
+        .input-with-label-wrap
+          label for="tags_line" Tags
+          input.form-control type="text" name="tags_line" id="tags_line" placeholder="Enter tags" autocomplete="off" ng-model="party.tags_line" ng-tags-highlight=true
+    .row.party-members
+      .party-member.col-xs-6.mobile-screen-width ng-repeat="member in party.party_members_attributes"
+        .member-delete-wrap ng-if="!member._destroy && !member.isNew"
+          button.btn.btn-danger ng-click="deleteMember(member)" Delete
+        .member-avatar-wrap ng-if="!member.isNew"
+          img.member-avatar ng-src="{{member.avatar_url}}"
+          .member-overlay
+          span.member-name
+            | {{member.username}}
+        .member-fields-wrap.form-group ng-if="!member.isNew && !member._destroy"
+          .input-with-label-wrap
+            label for="paid_{{member.id}}" ▲Paid
+            input.form-control type="number" name="paid" id="paid_{{member.id}}" placeholder="Enter paid" autocomplete="off" ng-model="member.paid"
+          .input-with-label-wrap
+            label for="debt_{{member.id}}" ▼Debt
+            input.form-control type="number" name="debt" id="debt_{{member.id}}" placeholder="Enter debt" autocomplete="off" ng-model="member.debt"
+        .member-deleted-wrap ng-if="member._destroy"
+          | This member is deleted
+          br
+          | (
+          a href="#" ng-click="restoreMember(member)" Restore
+          | )
+        .new-member-wrap ng-if="member.isNew"
+          .input-with-label-wrap activate-on-link=true
+            label for="member_name" Member Name
+            input.form-control type="text" name="tags_line" id="tags_line" placeholder="Enter member name" autocomplete="off" ng-members-highlight=true ng-member="member"
+
+      .party-member.col-xs-6.mobile-screen-width.buttons-panel-wrap.btn-add-member ng-if="!hasNewMember"
+        .buttons-panel
+          button.btn.btn-default ng-click="addMember(party)"
+            span.glyphicon.glyphicon-plus
+
+    .clearfix
+    .buttons-panel-wrap
+      .buttons-panel
+        button.btn.btn-lg.btn-default ng-click="rollback(party)" Cancel
+        button.btn.btn-lg.btn-success ng-click="save(party)" Save
+
+.item-container.loadable-content ng-if="loading"
+  .loading
+
+.item-container.full-size-btn-wrap ng-if="!loading && remain_pages > 0"
+  .buttons-panel-wrap.center
+    = button_tag class: "btn btn-link full-size-btn", :"ng-click" => "showMore()" do
+      | Show more...

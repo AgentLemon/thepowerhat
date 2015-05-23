@@ -1,0 +1,23 @@
+.item-container
+  .w280
+    h3.poiret.inline-title Enter your credentials
+    .form-group
+      .input-with-label-wrap
+        label for="email" Email
+        input.form-control name="email" id="email" type="text" placeholder="enter email" ng-model="login"
+    .form-group
+      .input-with-label-wrap
+        label for="password" Password
+        input.form-control name="password" id="password" type="password" placeholder="Password" ng-model="password" ng-keypress="$event.keyCode == 13 ? signIn() : null"
+    .checkbox
+      label
+        = check_box_tag "remember_me", "1", false, :"ng-model" => "rememberme"
+        | Remember me
+    .buttons-panel-wrap.right
+      .buttons-panel
+        button.btn.btn-lg.btn-primary ng-click="signIn()" Submit
+    .auth-buttons.buttons-panel-wrap.left
+      .buttons-panel
+        a.btn.btn-default.btn-lg href="/auth/github" target="_self"
+          i.fa.fa-github
+          | &nbsp;Use Github

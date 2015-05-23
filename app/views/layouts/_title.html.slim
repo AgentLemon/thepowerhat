@@ -1,0 +1,24 @@
+= link_to root_path do
+  .center-panel
+    .wrap
+      h3 The Power Hat
+
+- if logged_in?
+  .left-panel
+    .wrap
+      = link_to "#", class: "btn btn-link btn-open-menu-left" do
+        i.fa.fa-bars
+        - unless mobile_device?
+          | &nbsp;
+          | Menu
+          | &nbsp;
+          span.caret
+
+  .right-panel
+    .wrap
+      = link_to "#", class: "btn btn-link btn-open-menu-right" do
+        i.fa.fa-user
+        - unless mobile_device?
+          span.username
+            = current_user_name
+          span.caret

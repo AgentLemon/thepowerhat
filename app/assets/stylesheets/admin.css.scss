@@ -1,0 +1,17 @@
+body {
+  .admin {
+    visibility: hidden;
+  }
+
+  &.admin {
+    .admin {
+      visibility: visible;
+    }
+  }
+}
+
+body:not(.admin) {
+  .admin {
+    display: none;
+  }
+}

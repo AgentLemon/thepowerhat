@@ -1,0 +1,59 @@
+.item-container error-highlight="model.invalid_fields" error-highlight-messages="model.errors_list"
+
+  h3.poiret.inline-title My Profile
+
+  .alert.alert-danger.highlight-alert
+
+  .profile-form ng-if="!loading"
+    .row
+      .col-xs-3.text-center.mobile-screen-width.avatar-col
+        .form-group
+          img.avatar128px ng-src="{{model.avatar_url}}"
+          br
+          .buttons-panel-wrap.center
+            .buttons-panel
+              button.btn.btn-lg.btn-default.file-uploader-wrap ng-click=""
+                | Change
+                input.file-uploader id="avatar" name="avatar" type="file" onchange="angular.element(this).scope() && angular.element(this).scope().displayImage(this)"
+
+      .col-xs-9.mobile-screen-width
+        .form-group
+          .input-with-label-wrap admin-enabled=true
+            label for="email" disabled="disabled" Email
+            input.form-control.disabled type="text" name="email" id="email" placeholder="Enter email" ng-model="model.email" disabled="disabled"
+
+        .form-group
+          .input-with-label-wrap.admin
+            label for="role" Role
+            select.form-control name="role" id="role" ng-model="model.role"
+              option value="blocked" Blocked
+              option value="user" User
+              option value="admin" Admin
+
+        .form-group
+          .input-with-label-wrap
+            label for="first_name" First Name
+            input.form-control type="text" name="first_name" id="first_name" placeholder="Enter first name" ng-model="model.first_name" autocomplete="off"
+
+        .form-group
+          .input-with-label-wrap
+            label for="last_name" Last Name
+            input.form-control type="text" name="last_name" id="last_name" placeholder="Enter last name" ng-model="model.last_name" autocomplete="off"
+
+        .form-group
+          .input-with-label-wrap
+            label for="password" New Password
+            input.form-control type="password" name="password" id="password" placeholder="Enter new password" ng-model="model.password" autocomplete="off"
+
+        .form-group
+          .input-with-label-wrap
+            label for="password_confirmation" New Password Confirmation
+            input.form-control type="password" name="password_confirmation" id="password_confirmation" placeholder="Enter new password confirmation" ng-model="model.password_confirmation" autocomplete="off"
+
+        .buttons-panel-wrap
+          .buttons-panel
+            a.btn.btn-lg.btn-default.admin href="/users/{{model.id}}" Back
+            button.btn.btn-lg.btn-success ng-click="save()" Save
+
+.item-container.loadable-content ng-if="loading"
+  .loading

@@ -1,0 +1,34 @@
+.item-container.budget.user-show.with-bottom-line
+  .col-xs-6.mobile-screen-width
+    .buttons-panel-wrap.left
+      .buttons-panel
+        a.btn.btn-lg.btn-default href="/users" Back
+        a.btn.btn-lg.btn-warning.admin href="/users/{{model.id}}/edit" Edit
+  .col-xs-6.mobile-screen-width
+    .post-wrap.budget-post.user-item
+      .member-avatar-wrap
+        img.member-avatar ng-src="{{model.avatar_url}}"
+
+      .user-item-username
+        | {{model.username}}
+
+.item-container.budget.with-bottom-line
+  .post-wrap.budget-post.total-debt
+    .total Total:
+    .amount ng-class="{ paid: totalDebt > 0, debt: totalDebt < 0 }"
+      | {{formatPayment(formatCurrency(totalDebt)[0])}}
+      span.cents
+        | {{formatCurrency(totalDebt)[1]}}
+    .debts-container.row
+      .debt-item.party-members-show.col-xs-6.mobile-screen-width ng-repeat="debt in debts" ng-hide="debt.amount == 0"
+        .member-avatar-wrap
+          img.member-avatar ng-src="{{debt.avatar_url}}"
+          .member-overlay
+          span.member-name
+            | {{debt.username}}
+        .amount ng-class="{ paid: debt.amount > 0, debt: debt.amount < 0 }"
+          span.arrow
+            | {{getArrow(debt.amount)}}
+          | {{formatCurrency(debt.amount, { abs: true })[0]}}
+          span.cents
+            | {{formatCurrency(debt.amount)[1]}}

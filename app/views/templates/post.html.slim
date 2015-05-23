@@ -1,0 +1,93 @@
+.item-container activate-on-link=""
+  .post-wrap
+    .alert.alert-danger ng-show="errors"
+      strong
+        | Post wasn't saved!
+      ul
+        li ng-repeat="msg in errorMessages" ng-bind-html="msg"
+
+    .form-group
+      .input-with-label-wrap
+        = label_tag :title, "Title"
+        = text_field_tag :title, "", class: "form-control", placeholder: "Enter a title", autocomplete: "off", "ng-model" => "post.title"
+    .form-group ng-class="{ 'has-error': errors.message }"
+      .input-with-label-wrap
+        = label_tag :message, "Message"
+        = text_area_tag :message, "", class: "form-control", placeholder: "Enter a message", rows: 10, "ng-model" => "post.text"
+
+    .attachments-wrap
+      .separator-line
+        .separator-caption Attachments
+
+      .attachment.image ng-repeat="image in post.images"
+        .image-wrap ng-show="!image._destroy"
+          .image-with-overlay
+            img ng-src="{{image.thumbUrl}}"
+            .uploading-overlay ng-hide="image.uploaded"
+              .progress.progress-striped.active ng-show="image.uploading"
+                .progress-bar style="width: {{image.progress || 0}}%"
+          .destroy-wrap.x-button
+            = link_to "#", class: "destroy-btn", "ng-click" => "image._destroy = true" do
+              .span.glyphicon.glyphicon-remove
+          .buttons-panel-wrap.destroy-wrap
+            .buttons-panel
+              = button_tag class: "btn btn-danger destroy-btn", "ng-click" => "image._destroy = true" do
+                span.glyphicon.glyphicon-remove
+                | &nbsp;Delete
+        .deleted-message ng-show="image._destroy"
+          = "Image has been removed (#{link_to "restore", "#", class: "restore-btn", "ng-click" => "image._destroy = undefined"}).".html_safe
+
+      .attachment.secured_message ng-repeat="message in post.securedMessages"
+        h5 ng-show="!message._destroy" Encrypted Message
+
+        .input-group ng-if="message.message === undefined" ng-class="{ 'has-error': message.error }"
+          = text_field_tag "key", "", class: "form-control", placeholder: "Enter a key", autocomplete: "off", "ng-model" => "message.key", "ng-keypress" => "$event.keyCode == 13 ? decryptSecuredMessage(message) : null"
+          span.input-group-btn ng-click="decryptSecuredMessage(message)"
+            = button_tag class: "btn btn-primary submit-btn" do
+              | Ok
+
+        .decrypted-message-wrap ng-if="message.message !== undefined && !message._destroy"
+          = hidden_field_tag :id, "", "ng-model" => "message.id"
+          .form-group
+            .input-with-label-wrap
+              label for="secured-message-{{$index}}" Message to encrypt
+              = text_area_tag "secured-message-{{$index}}", "", id: "secured-message-{{$index}}", class: "form-control", placeholder: "Enter a message", autocomplete: "off", rows: 5, "ng-model" => "message.message", "ng-id" => "secured-message-{{$index}}"
+          .form-group
+            .input-with-label-wrap
+              label for="secured-key-{{$index}}" Key
+              = text_field_tag "secured-key-{{$index}}", "", id: "secured-key-{{$index}}", class: "form-control", placeholder: "Enter a key", autocomplete: "off", "ng-model" => "message.key"
+          .destroy-wrap.x-button
+            = link_to "#", class: "destroy-btn", "ng-click" => "message._destroy = true" do
+              .span.glyphicon.glyphicon-remove
+          .buttons-panel-wrap.destroy-wrap
+            .buttons-panel
+              = button_tag class: "btn btn-danger destroy-btn", "ng-click" => "message._destroy = true" do
+                span.glyphicon.glyphicon-remove
+                | &nbsp;Delete
+        .deleted-message ng-show="message._destroy"
+          = "Encrypted message has been removed (#{link_to "restore", "#", class: "restore-btn", "ng-click" => "message._destroy = undefined"}).".html_safe
+
+        .loading ng-show="message.loading"
+
+      .separator-line.less-margin ng-if="(post.securedMessages.length + post.images.length) > 0"
+
+      .attachments-panel
+        = button_tag class: "btn btn-default", "ng-click" => "post.securedMessages.push({ message: '' })" do
+          span.glyphicon.glyphicon-lock
+        = button_tag class: "btn btn-default file-uploader-wrap" do
+          span.glyphicon.glyphicon-picture
+          = file_field_tag "name", class: "file-uploader", onchange: "angular.element(this).scope().addImage(this)"
+
+      .separator-line
+
+    .buttons-panel-wrap
+      .buttons-panel
+        = link_to root_path, class: "btn btn-default" do
+          span.glyphicon.glyphicon-chevron-left
+          | &nbsp;Cancel
+        = link_to "#", method: "delete", confirm: "Do you really want to delete this post?", class: "btn btn-danger", "ng-if" => "post.id !== null" do
+          span.glyphicon.glyphicon-remove
+          | &nbsp;Delete
+        = button_tag class: "btn btn-success", "ng-click" => "save()" do
+          span.glyphicon.glyphicon-ok
+          | &nbsp;Save

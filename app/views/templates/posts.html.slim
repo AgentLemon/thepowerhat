@@ -1,0 +1,52 @@
+= render partial: "templates/partials/expanded_image"
+
+.item-container.with-bottom-line
+  .input-group activate-on-link=""
+    = text_field_tag "search", "", class: "form-control", placeholder: "Search", :"ng-model" => "search", :"ng-keypress" => "$event.keyCode == 13 ? newSearch() : null", "ng-tags-highlight" => true
+    span.input-group-btn
+      = button_tag class: "btn btn-primary", :"ng-click" => "newSearch()" do
+        span.glyphicon.glyphicon-search
+
+.item-container.with-bottom-line.full-size-btn-wrap
+  = link_to "Add Post", new_post_path, class: "btn btn-link full-size-btn"
+
+.item-container.no-items ng-if="noItems()"
+  span.glyphicon.glyphicon-question-sign
+  .no-items-sign No items here
+
+.item-container.with-bottom-line ng-repeat="post in posts"
+  .post-wrap
+    = link_to "{{post.url}}", class: "post-edit-link" do
+      .post-title
+        | {{post.title}}
+    .post-body
+      .post-message ng-bind-html="post.message"
+
+    .attachments-wrap ng-if="(post.securedMessages.length + post.images.length) > 0"
+      .separator-line
+        .separator-caption Attachments
+
+      .attachment.image ng-repeat="image in post.images"
+        div expandable-image=""
+
+      .attachment.secured_message ng-repeat="message in post.securedMessages"
+        h5 Encrypted Message
+        .input-group ng-if="message.message === undefined" ng-class="{ 'has-error': message.error }"
+          = password_field_tag "key", "", class: "form-control", placeholder: "Enter a key", autocomplete: "off", :"ng-model" => "message.key", :"ng-keypress" => "$event.keyCode == 13 ? decryptSecuredMessage(message) : null"
+          span.input-group-btn ng-click="decryptSecuredMessage(message)"
+            = button_tag class: "btn btn-primary submit-btn" do
+              | Ok
+        .destroy-wrap.x-button ng-if="message.message !== undefined"
+          = link_to "#", class: "destroy-btn", :"ng-click" => "message.key = undefined; message.message = undefined" do
+            .span.glyphicon.glyphicon-lock
+        .decrypted-message ng-if="message.message" ng-bind-html="message.html"
+        .loading ng-show="message.loading"
+
+
+.item-container.loadable-content ng-if="loading"
+  .loading
+
+.item-container.full-size-btn-wrap ng-if="!loading && remain_pages > 0"
+  .buttons-panel-wrap.center
+    = button_tag class: "btn btn-link full-size-btn", :"ng-click" => "showMore()" do
+      | Show more...

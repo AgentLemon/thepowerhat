@@ -1,0 +1,95 @@
+.user-item {
+  &.blocked {
+    img {
+      opacity: 0.5;
+    }
+
+    .user-item-username {
+      color: #ccc;
+    }
+  }
+  &.adminrole {
+    .user-item-username {
+      color: goldenrod;
+    }
+  }
+}
+
+.debts-matrix-modal {
+  .modal-body {
+    overflow-x: scroll;
+  }
+}
+
+table.debts-matrix {
+
+  max-width: 0;
+  margin: auto;
+
+  td:nth-child(even), th:nth-child(even) {
+    background: #f7f7f7;
+  }
+
+  tr:nth-child(odd) {
+    td {
+      background: #f7f7f7;
+      &:nth-child(even) {
+        background: #f0f0f0;
+      }
+    }
+  }
+
+  td:first-child {
+    width: 200px;
+    display: block;
+  }
+
+  td {
+    padding: 5px;
+    text-align: center;
+    .username {
+      height: 50px;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .amount {
+      font-size: 12px;
+      &.paid {
+        color: #419641;
+      }
+      &.debt {
+        color: #c12e2a;
+      }
+      .cents {
+        font-size: 0.7em;
+      }
+    }
+  }
+
+  th {
+    width: 50px;
+    height: 200px;
+    padding: 5px;
+    .username {
+      width: 50px;
+      height: 50px;
+      position: relative;
+      text-align: left;
+      font-weight: normal;
+      white-space: nowrap;
+      bottom: -80px;
+      transform: rotate(-90deg);
+
+      img.member-avatar {
+        transform: rotate(90deg);
+        margin-right: 10px;
+      }
+    }
+  }
+
+  img.member-avatar {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+  }
+}

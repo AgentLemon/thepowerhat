@@ -1,0 +1,15 @@
+# config/application.yml
+defaults: &defaults
+  github_id: b3de4bd68b2a32cf2963
+  github_secret: 7f2c5737fa2dd149a73d064525b1ba2018546167
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  github_id: <%= ENV["GITHUB_CLIENT_ID"] %>
+  github_secret: <%= ENV["GITHUB_SECRET"] %>

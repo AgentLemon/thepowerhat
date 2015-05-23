@@ -1,0 +1,86 @@
+.item-container.with-bottom-line
+  .input-group activate-on-link=true
+    = text_field_tag "search", "", class: "form-control", placeholder: "Search", :"ng-model" => "search", :"ng-keypress" => "$event.keyCode == 13 ? newSearch() : null", "ng-tags-highlight" => true
+    span.input-group-btn
+      = button_tag class: "btn btn-primary", :"ng-click" => "newSearch()" do
+        span.glyphicon.glyphicon-search
+
+.item-container.with-bottom-line.full-size-btn-wrap
+  button class="btn btn-link full-size-btn" ng-click="new()" Add Post
+
+.item-container.with-bottom-line.budget.info-container
+  .row
+    .form-group.col-xs-6
+      .input-with-label-wrap
+        label for="startDate" Start Date
+        span.date-presenter
+          | {{formatDate(startDate)}}
+        input type="date" class="form-control styled-field" ng-model="startDate" name="startDate" id="startDate"
+    .form-group.col-xs-6
+      .input-with-label-wrap
+        label for="endDate" End Date
+        span.date-presenter
+          | {{formatDate(endDate)}}
+        input type="date" class="form-control styled-field" ng-model="endDate" name="endDate" id="endDate"
+  - if !mobile_device?
+    .row
+      .form-group ng-class="{ 'col-xs-6': showEstimated(), 'col-xs-12': !showEstimated() }"
+        .input-with-label-wrap
+          label for="chart" Chart Type
+          select class="form-control styled-field" ng-model="chart" ng-options="i.name for i in charts" name="chart" id="chart"
+      .form-group.col-xs-6 ng-show="showEstimated()"
+        .input-with-label-wrap
+          label for="estimatedDaySpending" Estimated day Spending
+          input type="number" class="form-control styled-field" ng-model="estimatedDaySpending" name="estimatedDaySpending" id="estimatedDaySpending"
+    .chart-container ng-if="!noItems()" ng-chart-data="posts" ng-chart="chart" ng-reload-token="token" ng-start-date="startDate" ng-end-date="endDate" ng-day-spending="estimatedDaySpending"
+  .total-container.budget-post
+    .total Total:
+    .amount
+      | {{formatCurrency(totalAmount)[0]}}
+      span.cents
+        | {{formatCurrency(totalAmount)[1]}}
+
+.item-container.no-items ng-if="noItems()"
+  span.glyphicon.glyphicon-question-sign
+  .no-items-sign No items here
+
+.item-container.budget.with-bottom-line ng-repeat="post in posts"
+  .post-wrap.budget-post ng-show-on-screen="{{post.isNew()}}"
+    .moveable-container.animated-move ng-class="{ moved: post.isMoved }" ng-click="move(post)" ng-hide="post.isEdited"
+      .date-container
+        .date-wrap
+          .date ng-bind-html="formatDate(post.date, { lineBreak: true })"
+      .tags ng-bind-html="post.tags_line_formatted"
+      .amount
+        | {{formatCurrency(post.amount)[0]}}
+        span.cents
+          | {{formatCurrency(post.amount)[1]}}
+      .moveable-buttons
+        button.btn.btn-danger ng-click="delete(post)" Delete
+        button.btn.btn-success ng-click="edit(post)" Edit
+  .edit-container ng-show="post.isEdited"
+    .row
+      .form-group.col-xs-6
+        .input-with-label-wrap
+          label for="date" Date
+          span.date-presenter
+            | {{formatDate(post.date)}}
+          input type="date" class="form-control styled-field" ng-model="post.date" name="date" id="date"
+      .form-group.col-xs-6
+        .input-with-label-wrap
+          label for="amount" Amount
+          input type="number" class="form-control styled-field" ng-model="post.amount" name="amount" id="amount"
+    .clearfix
+    .form-group
+      .input-with-label-wrap
+        = label_tag :tags_line, "Tags"
+        = text_field_tag :tags_line, "", class: "form-control", placeholder: "Enter tags", autocomplete: "off", "ng-model" => "post.tags_line", "ng-tags-highlight" => true
+    .buttons-panel-wrap
+      .buttons-panel
+        = button_tag class: "btn btn-default", "ng-click" => "rollback(post)" do
+          | Cancel
+        = button_tag class: "btn btn-success", "ng-click" => "save(post)" do
+          | Save
+
+.item-container.loadable-content ng-if="loading"
+  .loading

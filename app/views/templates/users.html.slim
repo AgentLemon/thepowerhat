@@ -1,0 +1,74 @@
+.item-container.with-bottom-line
+  .input-group activate-on-link=true
+    input.form-control name="search" id="search" placeholder="Search" ng-model="search" ng-keypress="$event.keyCode == 13 ? newSearch() : null" ng-members-highlight="search"
+    span.input-group-btn
+      button.btn.btn-primary ng-click="newSearch()"
+        span.glyphicon.glyphicon-search
+
+.item-container.full-size-btn-wrap.with-bottom-line ng-if="!noItems()"
+  .buttons-panel-wrap.center
+    button.btn.btn-link.full-size-btn ng-click="showDebtsMatrix()" Show Debts Matrix
+
+.item-container.no-items ng-if="noItems()"
+  span.glyphicon.glyphicon-question-sign
+  .no-items-sign No items here
+
+.item-container.budget.with-bottom-line ng-repeat="user in collection"
+  .post-wrap.budget-post.user-item ng-class="{blocked: user.role == 'blocked', adminrole: user.role == 'admin'}"
+    a.member-avatar-wrap href="/users/{{user.id}}"
+      img.member-avatar ng-src="{{user.avatar_url}}"
+
+    a.user-item-username href="/users/{{user.id}}"
+      | {{user.username}}
+
+    .amount ng-class="{paid: totalDebt(user) > 0, debt: totalDebt(user) < 0}"
+      | {{formatPayment(formatCurrency(totalDebt(user))[0])}}
+      span.cents
+        | {{formatCurrency(totalDebt(user))[1]}}
+
+.item-container.loadable-content ng-if="loading"
+  .loading
+
+.item-container.full-size-btn-wrap ng-if="!loading && remain_pages > 0"
+  .buttons-panel-wrap.center
+    button.btn.btn-link.full-size-btn ng-click="showMore()" Show more...
+
+.modal.fade.debts-matrix-modal debts-matrix="debtsMatrix"
+  .modal-dialog.full-screen
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal"
+          span aria-hidden="true" &times
+          span class="sr-only" Close
+        h4 class="modal-title" Debts Matrix
+      .modal-body
+        table.debts-matrix
+          thead
+            tr
+              th
+              th ng-repeat="user in debtsMatrix.slice(1, debtsMatrix.length)"
+                .username
+                  img.member-avatar ng-src="{{user.avatar_url}}"
+                  | {{user.username}}
+              th
+          tbody
+            tr ng-repeat="user in debtsMatrix"
+              td
+                .username
+                  | {{user.username}}
+                  img.member-avatar ng-src="{{user.avatar_url}}"
+              td ng-repeat="whom in debtsMatrix.slice(1, debtsMatrix.length)"
+                .amount ng-class="{paid: user.debts[whom.id] > 0, debt: user.debts[whom.id] < 0}" ng-if="user.debts[whom.id] != null && user.debts[whom.id] != 0"
+                  | {{formatPayment(formatCurrency(user.debts[whom.id])[0])}}
+                  span.cents
+                    | {{formatCurrency(user.debts[whom.id])[1]}}
+              td
+                .amount ng-class="{paid: user.balance > 0, debt: user.balance < 0}"
+                  | {{formatPayment(formatCurrency(user.balance)[0])}}
+                  span.cents
+                    | {{formatCurrency(user.balance)[1]}}
+      .modal-footer
+        .buttons-panel-wrap
+          .buttons-panel
+            button type="button" class="btn btn-primary btn-lg" ng-click="recountDebts()" Recount Debts
+            button type="button" class="btn btn-default btn-lg" data-dismiss="modal" Close
