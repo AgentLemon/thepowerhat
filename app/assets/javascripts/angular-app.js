@@ -40,7 +40,7 @@ ThePowerHat.config(function($routeProvider, $locationProvider, $provide, $httpPr
 
         return $q.reject(rejection);
       }
-    }
+    };
 
   });
 

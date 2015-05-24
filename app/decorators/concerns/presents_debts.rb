@@ -11,11 +11,17 @@ module Concerns
       end
 
       def debts
-        @debts ||= @user.debts.where{ amount != 0 }.includes(:whom).map{ |i| DebtPresenter.new(i) }
+        @debts ||= get_debts_or_paids(:debts, :whom, DebtPresenter)
       end
 
       def paids
-        @paids ||= @user.paids.where{ amount != 0 }.includes(:who).map{ |i| PaidPresenter.new(i) }
+        @paids ||= get_debts_or_paids(:paids, :who, PaidPresenter)
+      end
+
+      private
+
+      def get_debts_or_paids(method, include, presenter)
+        @user.send(method).where{ amount != 0 }.includes(include).map{ |i| presenter.new(i) }
       end
 
     end

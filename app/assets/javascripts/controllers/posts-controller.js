@@ -7,7 +7,7 @@ controllers.controller("postsController", function($scope, $route, $location, po
   $scope.posts = [];
 
   $scope.noItems = function() {
-    return !$scope.loading && (!$scope.posts || $scope.posts.length == 0)
+    return !$scope.loading && (!$scope.posts || $scope.posts.length === 0);
   };
 
   $scope.showMore = function() {
@@ -17,7 +17,7 @@ controllers.controller("postsController", function($scope, $route, $location, po
 
   $scope.newSearch = function() {
     var search = $scope.search && $scope.search.trim() || undefined;
-    if ($route.current.params["search"] != search) {
+    if ($route.current.params.search !== search) {
       $scope.posts = [];
       $location.search("search", search);
     }

@@ -3,7 +3,7 @@ controllers.controller("loginController", function($scope, $route, $location, lo
   $scope.signIn = function() {
     loginAPI.signIn($scope.token, $scope.login, $scope.password, $scope.rememberme).success(function(response) {
       var redirectTo = response.redirect;
-      var match = redirectTo.match(/https?:\/\/[^\/]+(.*)/)
+      var match = redirectTo.match(/https?:\/\/[^\/]+(.*)/);
       if (match) {
         redirectTo = match[1];
       }
@@ -15,7 +15,7 @@ controllers.controller("loginController", function($scope, $route, $location, lo
     $scope.token = response;
   });
 
-  if ($route.current.originalPath == "/logout") {
+  if ($route.current.originalPath === "/logout") {
     loginAPI.signOut().success(function(response) {
       $location.url(response.redirect);
     });

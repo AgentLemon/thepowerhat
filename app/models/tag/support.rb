@@ -11,20 +11,22 @@ module Tag::Support
     has_many :tags, class_name: "Tag", through: :tag_links
 
     scope :by_tags, -> (*tags) do
-      if tags.try(:compact).present?
-        where("#{table_name}.id in (?)", joins(:tags).where("tags.name ilike any(array[?])", tags.map{ |i| "%#{i}%" }).select(:id))
-      end
+      select_tags("in", *tags)
     end
 
     scope :exclude_tags, -> (*tags) do
-      if tags.try(:compact).present?
-        where("#{table_name}.id not in (?)", joins(:tags).where("tags.name ilike any(array[?])", tags.map{ |i| "%#{i}%" }).select(:id))
-      end
+      select_tags("not in", *tags)
     end
 
     before_save :set_tags
 
     private
+
+    scope :select_tags, -> (relation, *tags) do
+      if tags.try(:compact).present?
+        where("#{table_name}.id #{relation} (?)", joins(:tags).where("tags.name ilike any(array[?])", tags.map{ |i| "%#{i}%" }).select(:id))
+      end
+    end
 
     def self.auto_tags(field)
       @auto_tags_field = field

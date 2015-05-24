@@ -19,7 +19,7 @@ controllers.controller("postController", function($scope, $route, $location, pos
         return image.uploaded ? null : image.id;
       });
 
-      if (ids.length == 0) {
+      if (ids.length === 0) {
         afterSaveSuccess();
       }
 
@@ -47,13 +47,13 @@ controllers.controller("postController", function($scope, $route, $location, pos
                 image.uploaded = true;
                 image.file = undefined;
 
-                if (ids.length == 0) {
+                if (ids.length === 0) {
                   afterSaveSuccess();
-                  $.each($scope.post.images, function(index, item) { item.uploaded = true });
+                  $.each($scope.post.images, function(index, item) { item.uploaded = true; });
                 }
               });
             },
-            error: function(event, statusText, responseText, form) {
+            error: function() {
               $.message.error("Uploading error");
               $scope.$apply(function() {
                 $scope.errors = { images: "Uploading error" };

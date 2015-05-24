@@ -28,10 +28,10 @@ $(function() {
   $.message.error = function(text) { $.message("danger", "<strong>Error!</strong> " + text); };
   $.message.info = function(text) { $.message("info", text); };
   $.message.success = function(text) { $.message("success", text); };
-  $.message.warning = function(text) { $.message("warning", "<strong>Warning!</strong> " + text); }
+  $.message.warning = function(text) { $.message("warning", "<strong>Warning!</strong> " + text); };
 
   $.each($.find(".flash-message"), function() {
     var $this = $(this);
     $.message($this.data("type"), $this.text());
-  })
+  });
 });
