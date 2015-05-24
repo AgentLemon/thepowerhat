@@ -64,26 +64,33 @@ module Tag::Support
       if auto_tags_field_value.present?
         tags_line = auto_tags_field_value
 
-        if self.class.make_tags
-          tags_line.gsub!(/(^| )([^# ])/){ |a| "#{a.first if a.size == 2}##{a.last}" }
-        end
+        add_hashes_to_tags_line!(tags_line) if self.class.make_tags
 
         tags = tags_line.scan(TAGS_REGEXP).map{ |i| i[1] }
-
-        autotags = (tags_line.scan(AUTOTAGS_REGEXP).first || "").strip.split(' ')
-        if autotags.present?
-          tags_line.sub!(AUTOTAGS_REGEXP, autotags.map{ |i| "##{i}" }.join(' '))
-          tags += autotags
-        end
-
-        scoped_tags = respond_to?(:tags_scope) ? tags_scope : user.tags
-        db_tags = scoped_tags.where("tags.name ilike any(array[?])", tags).load
-        if db_tags.size != tags.size
-          (tags - db_tags.map(&:name)).uniq.each{ |name| db_tags << scoped_tags.create!(name: name) }
-        end
+        tags += get_autotags!(tags_line)
+        db_tags = create_unexisted_tags!(tags)
 
         self.tag_links = tags.map{ |t| TagLink.new(link: self, tag: db_tags.find{ |db_t| db_t.name.match(Regexp.new("^#{t}$", "g")) }) }
       end
+    end
+
+    def add_hashes_to_tags_line!(tags_line)
+      tags_line.gsub!(/(^| )([^# ])/){ |a| "#{a.first if a.size == 2}##{a.last}" }
+    end
+
+    def get_autotags!(tags_line)
+      autotags = (tags_line.scan(AUTOTAGS_REGEXP).first || "").strip.split(' ')
+      tags_line.sub!(AUTOTAGS_REGEXP, autotags.map{ |i| "##{i}" }.join(' ')) if autotags.present?
+      autotags || []
+    end
+
+    def create_unexisted_tags!(tags)
+      scoped_tags = respond_to?(:tags_scope) ? tags_scope : user.tags
+      db_tags = scoped_tags.where("tags.name ilike any(array[?])", tags).load
+      if db_tags.size != tags.size
+        (tags - db_tags.map(&:name)).uniq.each{ |name| db_tags << scoped_tags.create!(name: name) }
+      end
+      db_tags
     end
 
   end

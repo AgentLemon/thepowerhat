@@ -55,6 +55,10 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+group :test do
+  gem "codeclimate-test-reporter", require: nil
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
