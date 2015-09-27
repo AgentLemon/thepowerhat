@@ -2,11 +2,11 @@
   .input-group activate-on-link=true
     = text_field_tag "search", "", class: "form-control", placeholder: "Search", :"ng-model" => "search", :"ng-keypress" => "$event.keyCode == 13 ? newSearch() : null", "ng-tags-highlight" => true
     span.input-group-btn
-      = button_tag class: "btn btn-lg btn-primary", :"ng-click" => "newSearch()" do
+      = button_tag class: "btn btn-primary", :"ng-click" => "newSearch()" do
         span.glyphicon.glyphicon-search
 
 .item-container.with-bottom-line.full-size-btn-wrap
-  button class="btn btn-lg btn-link full-size-btn" ng-click="new()" Add Post
+  button class="btn btn-link full-size-btn" ng-click="new()" Add Post
 
 .item-container.with-bottom-line.budget.info-container
   .row
@@ -56,8 +56,8 @@
         span.cents
           | {{formatCurrency(post.amount)[1]}}
       .moveable-buttons
-        button.btn.btn-lg.btn-danger ng-click="delete(post)" Delete
-        button.btn.btn-lg.btn-success ng-click="edit(post)" Edit
+        button.btn.btn-danger ng-click="delete(post)" Delete
+        button.btn.btn-success ng-click="edit(post)" Edit
   .edit-container ng-show="post.isEdited"
     .row
       .form-group.col-xs-6
