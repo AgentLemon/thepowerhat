@@ -1,6 +1,6 @@
 set :application, 'thepowerhat'
 set :repo_url, 'git@github.com:AgentLemon/thepowerhat.git'
-set :branch, 'production'
+set :branch, 'master'
 
 set :deploy_to, '/opt/thepowerhat'
 
