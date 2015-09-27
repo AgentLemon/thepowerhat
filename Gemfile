@@ -39,7 +39,7 @@ gem 'slim-rails'
 
 gem 'capistrano', '~> 3.0.1'
 gem 'capistrano-rails'
-gem 'capistrano-rvm'
+gem 'capistrano-rbenv', '~> 2.0'
 
 gem 'carrierwave'
 gem 'mini_magick'
