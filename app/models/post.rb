@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   include Tag::Support
   include Concerns::Paginatable
 
-  validate validates_presence_of :user_id, :message
+  validates_presence_of :user_id, :message
 
   belongs_to :user
   has_many :secured_messages, -> { order(:id) }, class_name: "SecuredMessage", dependent: :destroy

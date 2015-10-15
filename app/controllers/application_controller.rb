@@ -29,7 +29,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render_markup_if_html
-    render(nothing: true, layout: true) if params[:format].nil? || params[:format] == "html"
+    render_layout if params[:format].nil? || params[:format] == "html"
+  end
+
+  def render_layout
+    render("layouts/application", layout: false)
   end
 
 end

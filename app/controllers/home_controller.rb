@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   PAGE_SIZE = 10
 
   def index
-    render nothing: true, layout: true
+    render_layout
   end
 
   def login_user
@@ -23,7 +23,7 @@ class HomeController < ApplicationController
         render json: { error: I18n.t("user.wrong_password") }
       end
     else
-      render nothing: true, layout: true
+      render_layout
     end
   end
 
