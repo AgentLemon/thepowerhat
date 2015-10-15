@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.2.4'
 gem 'thin'
 
 # Use postgresql as the database for Active Record
@@ -47,6 +47,8 @@ gem 'mini_magick'
 gem 'rabl'
 
 gem 'whenever', require: false
+
+gem 'responders'
 
 group :development, :test do
   gem 'pry-rails'

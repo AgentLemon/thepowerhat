@@ -37,7 +37,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
+    if @post.update_attributes(post_params)
       render :show
     else
       render json: { errors: @post.errors, messages: @post.errors.full_messages }, status: :unprocessable_entity

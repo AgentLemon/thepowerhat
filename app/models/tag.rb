@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
 
-  validate validates_presence_of :user_id, :name
+  validates_presence_of :user_id, :name
 
   belongs_to :user
 
