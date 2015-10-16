@@ -11,7 +11,7 @@ node :text do |p|
 end
 
 node :url do |p|
-  post_path(p)
+  p.id.present? ? post_path(p) : posts_path
 end
 
 node :authenticity_token do |p|
