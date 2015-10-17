@@ -129,6 +129,16 @@ body {
   }
 }
 
+textarea {
+  min-height: 189px;
+}
+
+.decrypted-message-wrap {
+  textarea {
+    min-height: 115px;
+  }
+}
+
 .animated-move {
   backface-visibility: hidden;
   perspective: 1000;

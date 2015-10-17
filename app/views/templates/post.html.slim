@@ -51,7 +51,7 @@
           .form-group
             .input-with-label-wrap
               label for="secured-message-{{$index}}" Message to encrypt
-              = text_area_tag "secured-message-{{$index}}", "", id: "secured-message-{{$index}}", class: "form-control", placeholder: "Enter a message", autocomplete: "off", rows: 5, "ng-model" => "message.message", "ng-id" => "secured-message-{{$index}}"
+              = text_area_tag "secured-message-{{$index}}", "", id: "secured-message-{{$index}}", class: "form-control", placeholder: "Enter a message", autocomplete: "off", "ng-model" => "message.message", "ng-id" => "secured-message-{{$index}}", elastic: true
           .form-group
             .input-with-label-wrap
               label for="secured-key-{{$index}}" Key
