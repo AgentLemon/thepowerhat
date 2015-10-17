@@ -70,7 +70,12 @@ module Tag::Support
         tags += get_autotags!(tags_line)
         db_tags = create_unexisted_tags!(tags)
 
-        self.tag_links = tags.map{ |t| TagLink.new(link: self, tag: db_tags.find{ |db_t| db_t.name.match(Regexp.new("^#{t}$", "g")) }) }
+        self.tag_links = tags.map do |t|
+          TagLink.new(
+            link: self,
+            tag: db_tags.find{ |db_t| db_t.name.match(Regexp.new("^#{t}$", 'g')) }
+          )
+        end
       end
     end
 
@@ -85,13 +90,14 @@ module Tag::Support
     end
 
     def create_unexisted_tags!(tags)
-      scoped_tags = respond_to?(:tags_scope) ? tags_scope : user.tags
       db_tags = scoped_tags.from_array(tags).load
-      if db_tags.size != tags.size
-        unexisted = (tags - db_tags.map(&:name)).uniq
-        unexisted.each{ |name| db_tags << scoped_tags.create!(name: name) }
-      end
+      unexisted = (tags - db_tags.map(&:name)).uniq
+      unexisted.each{ |name| db_tags << scoped_tags.create!(name: name) }
       db_tags
+    end
+
+    def scoped_tags
+      @scoped_tags ||= respond_to?(:tags_scope) ? tags_scope : user.tags
     end
 
   end
