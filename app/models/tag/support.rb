@@ -86,9 +86,10 @@ module Tag::Support
 
     def create_unexisted_tags!(tags)
       scoped_tags = respond_to?(:tags_scope) ? tags_scope : user.tags
-      db_tags = scoped_tags.where("tags.name ilike any(array[?])", tags).load
+      db_tags = scoped_tags.from_array(tags).load
       if db_tags.size != tags.size
-        (tags - db_tags.map(&:name)).uniq.each{ |name| db_tags << scoped_tags.create!(name: name) }
+        unexisted = (tags - db_tags.map(&:name)).uniq
+        unexisted.each{ |name| db_tags << scoped_tags.create!(name: name) }
       end
       db_tags
     end

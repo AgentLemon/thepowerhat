@@ -6,8 +6,12 @@ class Tag < ActiveRecord::Base
 
   scope :like, -> str {
     if str.present?
-      where("tags.name ilike ?", "%#{str}%")
+      where('tags.name ilike ?', "%#{str}%")
     end
+  }
+
+  scope :from_array, -> tags {
+    where('tags.name ilike any(array[?])', tags)
   }
 
 end
