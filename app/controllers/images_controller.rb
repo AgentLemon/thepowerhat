@@ -13,7 +13,8 @@ class ImagesController < ApplicationController
     file = @image.file
     version = params[:version].try(:to_sym)
     file = file.send(version) if version.present? && file.respond_to?(version)
-    send_file file.path, type: "image/jpeg", disposition: "inline", filename: file.filename
+    file_path = File.exists?(file.path) ? file.path : File.join(Rails.root, 'public', 'no_image.png')
+    send_file file_path, type: "image/jpeg", disposition: "inline", filename: file.filename
   end
 
   private
