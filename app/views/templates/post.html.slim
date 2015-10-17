@@ -82,12 +82,6 @@
 
     .buttons-panel-wrap
       .buttons-panel
-        = link_to root_path, class: "btn btn-default" do
-          span.glyphicon.glyphicon-chevron-left
-          | &nbsp;Cancel
-        = link_to "#", method: "delete", confirm: "Do you really want to delete this post?", class: "btn btn-danger", "ng-if" => "post.id !== null" do
-          span.glyphicon.glyphicon-remove
-          | &nbsp;Delete
-        = button_tag class: "btn btn-success", "ng-click" => "save()" do
-          span.glyphicon.glyphicon-ok
-          | &nbsp;Save
+        = link_to 'Back', root_path, class: "btn btn-lg btn-default"
+        = link_to 'Delete', "#", method: "delete", class: "btn btn-lg btn-danger", "ng-if" => "post.id !== null", data: { confirm: "Do you really want to delete this post?" }
+        = button_tag 'Save', class: "btn btn-lg btn-success", "ng-click" => "save()"
