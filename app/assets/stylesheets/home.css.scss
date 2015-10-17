@@ -517,40 +517,6 @@ textarea {
   background-position: center center;
 }
 
-.loading-global-wrap {
-  display: none;
-  position: relative;
-  height: 20px;
-
-  .loading-global {
-    display: none;
-    position: absolute;
-    z-index: 1005;
-    height: 20px;
-    width: 600px;
-    color: black;
-    text-align: center;
-    font-weight: bold;
-    background: #f0ad4e linear-gradient(-45deg,
-      #222 25%,
-      transparent 25%,
-      transparent 50%,
-      #222 50%,
-      #222 75%,
-      transparent 75%,
-      transparent
-    );
-    background-size: 40px 40px;
-    text-shadow: -1px -1px 0 #fff, -1px 1px 0 #fff, 1px -1px 0 #fff, 1px 1px 0 #fff;
-    text-transform: uppercase;
-
-    &.fixed {
-      position: fixed;
-      top: 0;
-    }
-  }
-}
-
 .separator-line {
   border-top: solid 1px #999;
   border-bottom: solid 1px #999;
@@ -1158,15 +1124,6 @@ ul.dropdown-menu {
 
   .loading {
     background-size: 10% auto;
-  }
-
-  .loading-global {
-    position: fixed;
-    top: 50px;
-    width: 100%;
-    &.fixed {
-      top: auto;
-    }
   }
 
   ul.dropdown-menu.horizontal {

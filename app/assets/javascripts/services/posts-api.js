@@ -2,7 +2,7 @@ services.factory("postsAPI", function($http) {
   var postsAPI = {};
 
   postsAPI.getPosts = function(search, page) {
-    return HttpDecorator($http({
+    return $.HttpDecorator($http({
       method: "GET",
       url: "/posts.json",
       params: {
@@ -13,7 +13,7 @@ services.factory("postsAPI", function($http) {
   };
 
   postsAPI.decryptSecuredMessage = function(url, key) {
-    return HttpDecorator($http({
+    return $.HttpDecorator($http({
       method: "GET",
       url: url,
       params: {
@@ -23,14 +23,14 @@ services.factory("postsAPI", function($http) {
   };
 
   postsAPI.getPost = function(id) {
-    return HttpDecorator($http({
+    return $.HttpDecorator($http({
       method: "GET",
       url: "/posts/" + id + ".json"
     }));
   };
 
   postsAPI.savePost = function(post) {
-    return HttpDecorator($http({
+    return $.HttpDecorator($http({
       method: post.id ? "PUT" : "POST",
       url: (post.id ? ("/posts/" + post.id) : "/posts") + ".json",
       data: {

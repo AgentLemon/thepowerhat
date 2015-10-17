@@ -2,7 +2,7 @@ services.factory("budgetAPI", ($http) ->
   budgetAPI = {}
 
   budgetAPI.getRecords = (search, startDate, endDate) ->
-    HttpDecorator($http(
+    $.HttpDecorator($http(
       method: "GET"
       url: "/budget.json"
       params:

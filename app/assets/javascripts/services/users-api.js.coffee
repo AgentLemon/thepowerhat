@@ -2,7 +2,7 @@ services.factory("usersAPI", ($http) ->
   usersAPI = {}
 
   usersAPI.getProfile = (id) ->
-    HttpDecorator($http(
+    $.HttpDecorator($http(
       method: "GET"
       url: "/profile.json"
       params:
@@ -10,7 +10,7 @@ services.factory("usersAPI", ($http) ->
     ))
 
   usersAPI.getRecords = (search, page) ->
-    HttpDecorator($http(
+    $.HttpDecorator($http(
       method: "GET"
       url: "/users.json"
       params:
@@ -19,13 +19,13 @@ services.factory("usersAPI", ($http) ->
     ))
 
   usersAPI.getDebtsMatrix = () ->
-    HttpDecorator($http(
+    $.HttpDecorator($http(
       method: "GET"
       url: "/users/debts_matrix.json"
     ))
 
   usersAPI.recountDebts = () ->
-    HttpDecorator($http(
+    $.HttpDecorator($http(
       method: "POST"
       url: "/users/recount_debts.json"
     ))

@@ -2,7 +2,7 @@ services.factory("partiesAPI", ($http) ->
   partiesAPI = {}
 
   partiesAPI.getRecords = (search, startDate, endDate, page) ->
-    HttpDecorator($http(
+    $.HttpDecorator($http(
       method: "GET"
       url: "/parties.json"
       params:
@@ -16,7 +16,7 @@ services.factory("partiesAPI", ($http) ->
   builder.extendWithCRUD(partiesAPI)
 
   partiesAPI.getTotalDebts = ->
-    HttpDecorator($http(
+    $.HttpDecorator($http(
       method: "GET"
       url: "/parties/total_debts.json"
     ))

@@ -4,13 +4,13 @@ services.ServiceBuilder = ($http, recordName, singularRecordName) ->
 
   builder.extendWithCRUD = (api) ->
     api.newRecord = ->
-      return HttpDecorator($http(
+      return $.HttpDecorator($http(
         method: "GET"
         url: "/#{recordName}/new.json"
       ))
 
     api.loadRecord = (id) ->
-      return HttpDecorator($http(
+      return $.HttpDecorator($http(
         method: "GET"
         url: "/#{recordName}/#{id}.json"
       ))
@@ -25,7 +25,7 @@ services.ServiceBuilder = ($http, recordName, singularRecordName) ->
       data = {}
       data[singularRecordName] = record.getAttributes()
 
-      return HttpDecorator($http(
+      return $.HttpDecorator($http(
         method: method
         url: url
         data: data
@@ -33,7 +33,7 @@ services.ServiceBuilder = ($http, recordName, singularRecordName) ->
 
     api.deleteRecord = (record) ->
       if record.id
-        HttpDecorator($http(
+        $.HttpDecorator($http(
           method: "DELETE"
           url: "/#{recordName}/" + record.id + ".json"
         ))

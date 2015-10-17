@@ -1,4 +1,4 @@
-window.HttpDecorator = ($http) ->
+$.HttpDecorator = ($http) ->
   @success = (callback) ->
     $.setGlobalLoading(true)
 
