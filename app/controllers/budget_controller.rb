@@ -13,7 +13,7 @@ class BudgetController < ApplicationController
     scope = current_user.budget.by_tags(*search_tags).exclude_tags(*excluded_tags)
     scope = scope.from_date(Date.strptime(params[:start_date])) if params[:start_date].present?
     scope = scope.to_date(Date.strptime(params[:end_date])) if params[:end_date].present?
-    scope = scope.includes(:tags)
+    scope = scope.includes(:tag_links, :tags)
     @budget = BudgetListPresenter.new(scope.ordered)
   end
 
