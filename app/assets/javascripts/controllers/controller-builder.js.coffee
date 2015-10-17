@@ -32,14 +32,11 @@ controllers.ControllerBuilder = (controller, $scope, $route) ->
 
   builder.extendWithAPI = (api, editedCallback) ->
     $scope.new = ->
-      $.setGlobalLoading(true)
       api.newRecord().success((response) ->
         record = controller.decorate(response)
         $scope.collection.unshift(record)
         $scope.edit(record)
-        $.setGlobalLoading(false)
       ).error( ->
-        $.setGlobalLoading(false)
         $.message.error("An error has occured");
       )
     $scope.rollback = (record) ->
@@ -49,23 +46,18 @@ controllers.ControllerBuilder = (controller, $scope, $route) ->
         record.rollback()
         record.isEdited = false
     $scope.save = (record) ->
-      $.setGlobalLoading(true)
       api.saveRecord(record).success((response) ->
         record.reassignAttributes(response)
         record.isEdited = false
-        $.setGlobalLoading(false)
         $.message.success("Saved!");
         editedCallback() if editedCallback
       ).error( ->
-        $.setGlobalLoading(false)
         $.message.error("An error has occured");
       )
     $scope.delete = (record) ->
       if confirm("Are you sure you want to delete record?")
-        $.setGlobalLoading(true)
         api.deleteRecord(record).success( ->
           $scope.collection = _.without($scope.collection, record)
-          $.setGlobalLoading(false)
           $.message.success("Removed!");
           editedCallback() if editedCallback
         ).error( ->

@@ -22,7 +22,6 @@ controllers.controller("partiesController", ($scope, $route, $location, partiesA
       $scope.collection = []
 
     $scope.loading = true
-    $.setGlobalLoading(true)
     partiesAPI.getRecords($scope.search, $scope.startDate, $scope.endDate, $scope.page).success((response) ->
       if response.parties
         $scope.collection = $scope.collection.concat(controller.decorateCollection(response.parties))
@@ -31,17 +30,14 @@ controllers.controller("partiesController", ($scope, $route, $location, partiesA
       $scope.remain_pages = response.remain_pages
       $scope.page = response.page
       $scope.loading = false
-      $.setGlobalLoading(false)
     )
 
   @reloadTotalDebts = ->
     $scope.loading = true
-    $.setGlobalLoading(true)
     partiesAPI.getTotalDebts().success((response) ->
       $scope.totalDebt = parseFloat(response.total_debt)
       $scope.debts = controller.processDebts(response.debts, response.paids)
       $scope.loading = false
-      $.setGlobalLoading(false)
     )
 
   $scope.newSearch = ->
