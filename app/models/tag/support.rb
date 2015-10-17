@@ -3,7 +3,7 @@ module Tag::Support
   extend ActiveSupport::Concern
 
   AUTOTAGS_REGEXP = /^[^#\n]*\z/
-  TAGS_REGEXP = /((?<=\s)|^)#([\wа-яА-Я]+)/
+  TAGS_REGEXP = /((?<=\s)|^)#([^#\s]+)/
 
   included do |base|
 
