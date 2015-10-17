@@ -10,7 +10,8 @@ module HomeHelper
     text = add_itallic text
     text = add_code text
     text = add_hashtags text
-    simple_format(text)
+    text.gsub!(/\n/, '<br/>')
+    text
   end
 
   protected

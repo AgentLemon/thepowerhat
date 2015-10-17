@@ -19,11 +19,13 @@ $( ->
 
   loadingOn = ->
     $('.loading-global').show()
-    window.scrollBy(0, -20)
+    if window.scrollY != 0
+      window.scrollBy(0, -20)
 
   loadingOff = ->
     $('.loading-global').hide()
-    window.scrollBy(0, 20)
+    if window.scrollY != 0
+      window.scrollBy(0, 20)
 
   appendMessage = (type, message) ->
     $message = $('<div class="message"/>').addClass(type).html(message)
