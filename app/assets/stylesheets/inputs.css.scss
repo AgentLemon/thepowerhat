@@ -1,0 +1,83 @@
+.input-with-label-wrap {
+  position: relative;
+  .twitter-typeahead {
+    width: 100%;
+  }
+  input, textarea, select, span.date-presenter {
+    border-radius: 0;
+    border: none;
+    border-bottom: solid 1px #ccc;
+    box-shadow: none;
+    background-color: #fdfde0;
+    height: 38px;
+    padding-top: 15px;
+    padding-bottom: 0;
+    &[disabled] {
+      cursor: not-allowed;
+      background-color: #fdfdf0;
+      color: #888;
+    }
+  }
+  textarea {
+    min-height: 190px;
+    overflow: hidden;
+  }
+  select {
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  span.date-presenter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-left: 14px;
+    z-index: 1;
+  }
+  input[type="date"] {
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+  }
+  input[type="date"]::-webkit-clear-button,
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    background: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+  }
+  label {
+    z-index: 2;
+    position: absolute;
+    top: 1px;
+    text-transform: uppercase;
+    color: #888;
+    padding: 1px 13px 0px 13px;
+    font-weight: bold;
+    font-size: 11px;
+    border-radius: 0px 0px 4px 4px;
+    margin: 0;
+    height: 15px;
+    pointer-events: none;
+  }
+}
+
+.has-error {
+  .input-with-label-wrap {
+    input, textarea, select, span.date-presenter {
+      background-color: #fde0e0;
+    }
+
+    label {
+      background-color: #fde0e0;
+    }
+  }
+}
