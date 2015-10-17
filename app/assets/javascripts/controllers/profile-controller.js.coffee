@@ -6,8 +6,6 @@ controllers.controller("profileController", ($scope, $route, $location, usersAPI
   $scope.model = null
 
   $scope.save = ->
-    $.setGlobalLoading(true)
-
     $form = $('<form enctype="multipart/form-data"/>')
     $form.append($(".profile-form input").clone())
     _.each($(".profile-form select"), (item) ->
@@ -37,12 +35,9 @@ controllers.controller("profileController", ($scope, $route, $location, usersAPI
           if !$route.current.params.id
             $("span.username").text($scope.model.username)
           $file[0].value = ""
-
-        $.setGlobalLoading(false)
       ,
       error: (event, statusText, responseText, form) ->
         $.message.error("An error has occured")
-        $.setGlobalLoading(false)
     )
     null
 
@@ -52,11 +47,9 @@ controllers.controller("profileController", ($scope, $route, $location, usersAPI
       $scope.$apply( -> $scope.model.avatar_url = e.target.result)
     reader.readAsDataURL(fileInput.files[0]);
 
-  $.setGlobalLoading(true)
   usersAPI.getProfile($route.current.params.id).success( (response) ->
     $scope.model = new models.User(response)
     $scope.loading = false
-    $.setGlobalLoading(false)
   )
 
 )

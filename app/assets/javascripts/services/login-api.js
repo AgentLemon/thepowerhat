@@ -2,14 +2,14 @@ services.factory("loginAPI", function($http) {
   var loginAPI = {};
 
   loginAPI.getToken = function() {
-    return $http({
+    return $.HttpDecorator($http({
       method: "GET",
       url: "/token"
-    });
+    }));
   };
 
   loginAPI.signIn = function(token, login, password, rememberme) {
-    return $http({
+    return $.HttpDecorator($http({
       method: "POST",
       url: '/login.json',
       params: {
@@ -18,14 +18,14 @@ services.factory("loginAPI", function($http) {
         password: password,
         remember_me: rememberme
       }
-    });
+    }));
   };
 
   loginAPI.signOut = function() {
-    return $http({
+    return $.HttpDecorator($http({
       method: "GET",
       url: "/logout.json"
-    });
+    }));
   };
 
   return loginAPI;

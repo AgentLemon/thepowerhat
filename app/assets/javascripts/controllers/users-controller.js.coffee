@@ -16,14 +16,12 @@ controllers.controller("usersController", ($scope, $route, $location, usersAPI) 
       $scope.collection = []
 
     $scope.loading = true
-    $.setGlobalLoading(true)
     usersAPI.getRecords($scope.search, $scope.page).success((response) ->
       if response.users
         $scope.collection = $scope.collection.concat(controller.decorateCollection(response.users))
       $scope.remain_pages = response.remain_pages
       $scope.page = response.page
       $scope.loading = false
-      $.setGlobalLoading(false)
     )
 
   $scope.newSearch = ->
@@ -69,14 +67,11 @@ controllers.controller("usersController", ($scope, $route, $location, usersAPI) 
     )
 
     $scope.debtsMatrix = matrix
-    $.setGlobalLoading(false)
 
   $scope.showDebtsMatrix = ->
-    $.setGlobalLoading(true)
     usersAPI.getDebtsMatrix().success(processDebtsMatrix)
 
   $scope.recountDebts = ->
-    $.setGlobalLoading(true)
     usersAPI.recountDebts().success(processDebtsMatrix)
 
   @getData()

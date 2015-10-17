@@ -37,10 +37,6 @@ gem 'symbolize'
 
 gem 'slim-rails'
 
-gem 'capistrano', '~> 3.0.1'
-gem 'capistrano-rails'
-gem 'capistrano-rbenv', '~> 2.0'
-
 gem 'carrierwave'
 gem 'mini_magick'
 
@@ -55,6 +51,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+end
+
+group :development do
+  gem 'capistrano', '~> 3.0.1'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv', '~> 2.0'
 end
 
 group :test do

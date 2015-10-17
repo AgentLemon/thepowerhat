@@ -24,6 +24,7 @@
 //= require underscore.string.min
 //= require underscore.inflections.min
 //= require highcharts.min
+//= require http-decorator
 //= require angular-app.js
 //= require models/model-builder
 //= require services/service-builder

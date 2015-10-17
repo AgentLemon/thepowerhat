@@ -7,11 +7,15 @@ module Concerns
     included do
 
       def tags_line
-        tags.map{ |i| "##{i.name}" }.join(" ")
+        tags_list.map{ |i| "##{i.name}" }.join(" ")
       end
 
       def tags_array
-        tags.map(&:name)
+        tags_list.map(&:name)
+      end
+
+      def tags_list
+        tag_links.map(&:tag)
       end
 
     end
