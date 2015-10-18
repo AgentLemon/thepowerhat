@@ -19,4 +19,20 @@ html
       .content-container.mobile
         .message
 
-    ng-view
+    .title-container.stub.invisible
+    .title-container
+      .content-container.panel-container.mobile
+        = render partial: "layouts/title"
+
+    .content-container.global-messages-container.mobile
+      .global-messages
+        .loading-global
+          | Loading...
+
+    .content-container.page-content.mobile
+      .menu-col.left
+        = render partial: "layouts/vertical_menu_left"
+      .menu-col.right
+        = render partial: "layouts/vertical_menu_right"
+      .page-col
+        ng-view

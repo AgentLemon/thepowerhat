@@ -25,7 +25,22 @@ html
           | &times;
 
     .page-wrapper
-      ng-view
+      .title-container.stub
+        .content-container.panel-container
+          = render "layouts/title"
+
+      .content-container.global-messages-container
+        .global-messages
+          .loading-global
+            | Loading...
+
+      .content-container.page-content
+        .menu-col.left.animated-move
+          = render partial: "layouts/vertical_menu_left"
+        .menu-col.right.animated-move
+          = render partial: "layouts/vertical_menu_right"
+        .page-col.animated-move
+          ng-view
 
       .bottom-line
     .footer-container

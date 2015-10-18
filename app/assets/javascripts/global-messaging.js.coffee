@@ -17,15 +17,17 @@ $( ->
       loadingFixed = false;
   )
 
+  scrollWindow = (px) ->
+    if window.scrollY != 0
+      window.scrollBy(0, px)
+
   loadingOn = ->
     $('.loading-global').show()
-    if window.scrollY != 0
-      window.scrollBy(0, -20)
+    scrollWindow(-20)
 
   loadingOff = ->
     $('.loading-global').hide()
-    if window.scrollY != 0
-      window.scrollBy(0, 20)
+    scrollWindow(20)
 
   appendMessage = (type, message) ->
     $message = $('<div class="message"/>').addClass(type).html(message)
@@ -34,9 +36,9 @@ $( ->
     $message.on('click', ->
       $message.closest('.global-messages-container').find('.stub .message:first').remove()
       $message.remove();
-      window.scrollBy(0, 20)
+      scrollWindow(20)
     )
-    window.scrollBy(0, -20)
+    scrollWindow(-20)
     setTimeout(( -> $message.click()), 5000)
 
   $.setGlobalLoading = (value) ->
