@@ -14,17 +14,8 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 
   body ng-app="ThePowerHat" class="#{"admin" if current_user && current_user.admin?}"
-
-    - if flash[:error].present?
-      .flash-message data-type="danger" = flash[:error]
-
-    .screen-message.alert.alert-warning
-      .content-container
-        .message
-        = button_tag class: "close" do
-          | &times;
-
     .page-wrapper
+      .menu-mobile-stub
       .title-container.stub
         .content-container.panel-container
           = render "layouts/title"

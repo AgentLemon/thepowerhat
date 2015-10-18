@@ -2,7 +2,7 @@ $( ->
   loadingFixed = false
 
   $(document).on('scroll', ->
-    threshold = if screen.width > 480 then 40 else 0
+    threshold = if innerWidth > 600 then 40 else -1
 
     if window.scrollY > threshold && !loadingFixed
       $globalMessages = $('.global-messages')
@@ -20,6 +20,7 @@ $( ->
   scrollWindow = (px) ->
     if window.scrollY != 0
       window.scrollBy(0, px)
+    $(document).trigger('scroll')
 
   loadingOn = ->
     $('.loading-global').show()
@@ -52,7 +53,7 @@ $( ->
     warning: (text) ->
       appendMessage('warning', text)
     info: (text) ->
-      appendMessage('success', text)
+      appendMessage('info', text)
   }
 
   null

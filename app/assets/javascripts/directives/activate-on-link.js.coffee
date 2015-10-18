@@ -1,5 +1,5 @@
 directives.directive("activateOnLink", () ->
   (scope, element, attrs) ->
-    if screen.width > 480
+    if innerWidth > 600
       $(element).find("input:first").focus()
 )

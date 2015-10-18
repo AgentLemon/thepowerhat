@@ -8,7 +8,7 @@
     .wrap
       = link_to "#", class: "btn btn-link btn-open-menu-left" do
         i.fa.fa-bars
-        - unless mobile_device?
+        span.menu-label
           | &nbsp;
           | Menu
           | &nbsp;
@@ -18,7 +18,7 @@
     .wrap
       = link_to "#", class: "btn btn-link btn-open-menu-right" do
         i.fa.fa-user
-        - unless mobile_device?
+        span.menu-label
           span.username
             = current_user_name
           span.caret

@@ -65,11 +65,11 @@
   }
 }
 
-.mobile {
+@media(max-width: 600px) {
   .global-messages {
-    position: fixed;
-    top: auto;
-    width: 100%;
+    position: fixed !important;
+    top: 50px !important;
+    width: 100% !important;
     &.fixed {
       top: auto;
     }

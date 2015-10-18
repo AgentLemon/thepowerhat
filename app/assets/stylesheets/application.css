@@ -10,5 +10,9 @@
  *
  *= require_self
  *= require font-awesome.min
+ *= require bootstrap-theme.min
+ *= require bootstrap.min
+ *= require home
+ *= require mobile
  *= require_tree .
  */
