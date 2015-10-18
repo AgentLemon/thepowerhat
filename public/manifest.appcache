@@ -1,0 +1,28 @@
+CACHE MANIFEST
+# 2015-10-18:v2
+
+CACHE:
+favicon.png
+assets/application.js
+assets/application.css
+https://fonts.googleapis.com/css?family=Poiret+One&subset=latin,cyrillic
+fonts/FontAwesome.otf
+fonts/fontawesome-webfont.eot
+fonts/fontawesome-webfont.svg
+fonts/fontawesome-webfont.ttf
+fonts/fontawesome-webfont.woff
+fonts/fontawesome-webfont.woff2
+fonts/glyphicons-halflings-regular.eot
+fonts/glyphicons-halflings-regular.svg
+fonts/glyphicons-halflings-regular.ttf
+fonts/glyphicons-halflings-regular.woff
+templates/budget_list.html
+templates/parties.html
+templates/post.html
+templates/posts.html
+templates/profile.html
+templates/user.html
+templates/users.html
+
+NETWORK:
+*

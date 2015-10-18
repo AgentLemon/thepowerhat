@@ -1,5 +1,5 @@
 doctype html
-html
+html manifest="#{ Rails.env.production? ? 'manifest.appcache' : '' }"
   head
     title The Power Hat
 
