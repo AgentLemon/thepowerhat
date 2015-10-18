@@ -1,0 +1,154 @@
+@media(max-width: 600px) {
+  .content-container {
+    width: 100%;
+  }
+
+  .page-content {
+    margin-bottom: 0;
+    min-height: 0;
+  }
+
+  .title-container {
+    height: 50px;
+    position: fixed !important;
+    h3 {
+      padding-top: 7px;
+      font-size: 28px;
+    }
+    .btn-link {
+      font-size: 35px;
+      margin-top: -12px;
+    }
+    .menu-label {
+      display: none;
+    }
+  }
+
+  .menu-mobile-stub {
+    visibility: visible;
+    height: 50px;
+  }
+
+  .menu-col {
+    position: fixed;
+    overflow-y: auto;
+  }
+
+  .buttons-panel-wrap {
+    .buttons-panel {
+      display: block;
+      width: 100%;
+      a, button {
+        margin-left: 0 !important;
+        margin-bottom: 10px;
+        &.btn {
+          width: 100%;
+          padding: 10px 16px;
+          font-size: 18px;
+          line-height: 1.33;
+        }
+      }
+    }
+  }
+
+  .attachments-panel {
+    .btn {
+      padding: 10px 16px;
+      font-size: 18px;
+      line-height: 1.33;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 52px;
+      height: 45px;
+    }
+  }
+
+  .attachment {
+    &.image {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    .image-wrap {
+      .image-with-overlay {
+        position: relative;
+      }
+    }
+    .destroy-wrap {
+      margin-top: 10px;
+      width: 100%;
+      &.buttons-panel-wrap {
+        display: inherit;
+      }
+      &.x-button {
+        display: none;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    &.full-size {
+      top: 47px;
+      width: 320px;
+      &.left-menu {
+        left: 0;
+      }
+      &.right-menu {
+        left: -270px;
+      }
+    }
+  }
+
+  .screen-message {
+    top: 17px;
+  }
+
+  .chart-container {
+    height: 210px;
+  }
+
+  .loading {
+    background-size: 10% auto;
+  }
+
+  ul.dropdown-menu.horizontal {
+    &.left-menu:before {
+      left: 15px;
+    }
+
+    &.right-menu:before {
+      right: 15px;
+    }
+
+  }
+
+  .mobile-screen-width {
+    width: 100%;
+  }
+
+  .not-animated-mobile {
+    transition: none;
+  }
+
+  .avatar-col {
+    padding-right: 15px;
+  }
+
+  .party-members {
+    .member-fields-wrap {
+      width: 123px;
+    }
+  }
+
+  .auth-buttons {
+    display: block;
+    top: 0;
+  }
+}
+
+@media(max-width: 479px) {
+  .chart-container {
+    display: none;
+  }
+}

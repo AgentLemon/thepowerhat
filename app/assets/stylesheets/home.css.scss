@@ -27,9 +27,6 @@ body {
 .content-container {
   width: 600px;
   margin: auto;
-  &.mobile {
-    width: 320px;
-  }
 }
 
 .title-container {
@@ -117,16 +114,16 @@ body {
   }
 }
 
+.menu-mobile-stub {
+  visibility: hidden;
+}
+
 .page-content {
   background-color: #fff;
   margin-bottom: 50px;
   position: relative;
   overflow: hidden;
   min-height: 465px;
-  &.mobile {
-    margin-bottom: 0px;
-    min-height: 0px;
-  }
 }
 
 textarea {
@@ -1038,135 +1035,5 @@ ul.dropdown-menu {
     font-size: 16px;
     display: table-cell;
     width: 100%;
-  }
-}
-
-.mobile {
-  .title-container {
-    height: 50px;
-    h3 {
-      padding-top: 7px;
-      font-size: 28px;
-    }
-    .btn-link {
-      font-size: 24px;
-    }
-  }
-
-  .menu-col {
-    position: fixed;
-    overflow-y: scroll;
-  }
-
-  .buttons-panel-wrap {
-    .buttons-panel {
-      display: block;
-      width: 100%;
-      a, button {
-        margin-left: 0;
-        margin-bottom: 10px;
-        &.btn {
-          width: 100%;
-          padding: 10px 16px;
-          font-size: 18px;
-          line-height: 1.33;
-        }
-      }
-    }
-  }
-
-  .attachments-panel {
-    .btn {
-      padding: 10px 16px;
-      font-size: 18px;
-      line-height: 1.33;
-      border-radius: 6px;
-    }
-
-    button {
-      width: 52px;
-      height: 45px;
-    }
-  }
-
-  .attachment {
-    &.image {
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
-    .image-wrap {
-      .image-with-overlay {
-        position: relative;
-      }
-    }
-    .destroy-wrap {
-      margin-top: 10px;
-      width: 100%;
-      &.buttons-panel-wrap {
-        display: inherit;
-      }
-      &.x-button {
-        display: none;
-      }
-    }
-  }
-
-  .dropdown-menu {
-    &.full-size {
-      top: 47px;
-      width: 320px;
-      &.left-menu {
-        left: 0px;
-      }
-      &.right-menu {
-        left: -270px;
-      }
-    }
-  }
-
-  .screen-message {
-    top: 17px;
-  }
-
-  .chart-container {
-    height: 210px;
-  }
-
-  .loading {
-    background-size: 10% auto;
-  }
-
-  ul.dropdown-menu.horizontal {
-    &.left-menu:before {
-      left: 15px;
-    }
-
-    &.right-menu:before {
-      right: 15px;
-    }
-
-  }
-
-  .mobile-screen-width {
-    width: 100%;
-  }
-
-  .not-animated-mobile {
-    transition: none;
-  }
-
-  .avatar-col {
-    padding-right: 15px;
-  }
-
-  .party-members {
-    .member-fields-wrap {
-      width: 123px;
-    }
-  }
-
-  .auth-buttons {
-    display: block;
-    top: 0;
   }
 }

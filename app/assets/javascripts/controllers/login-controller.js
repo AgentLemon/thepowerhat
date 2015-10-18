@@ -7,7 +7,7 @@ controllers.controller("loginController", function($scope, $route, $location, lo
       if (match) {
         redirectTo = match[1];
       }
-      $location.url(redirectTo);
+      location.href = redirectTo;
     });
   };
 

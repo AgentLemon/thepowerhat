@@ -14,18 +14,24 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 
   body ng-app="ThePowerHat" class="#{"admin" if current_user && current_user.admin?}"
-
-    - if flash[:error].present?
-      .flash-message data-type="danger" = flash[:error]
-
-    .screen-message.alert.alert-warning
-      .content-container
-        .message
-        = button_tag class: "close" do
-          | &times;
-
     .page-wrapper
-      ng-view
+      .menu-mobile-stub
+      .title-container.stub
+        .content-container.panel-container
+          = render "layouts/title"
+
+      .content-container.global-messages-container
+        .global-messages
+          .loading-global
+            | Loading...
+
+      .content-container.page-content
+        .menu-col.left.animated-move
+          = render partial: "layouts/vertical_menu_left"
+        .menu-col.right.animated-move
+          = render partial: "layouts/vertical_menu_right"
+        .page-col.animated-move
+          ng-view
 
       .bottom-line
     .footer-container
