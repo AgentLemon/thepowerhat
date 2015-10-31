@@ -7,8 +7,8 @@
   cursor: pointer;
   font-weight: normal;
   position: relative;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  //line-height: 20px;
 
   &.checked {
     background-color: #cfffda;
@@ -16,13 +16,18 @@
   }
 
   input {
-    top: 2px;
+    top: 6px;
     display: inline-block;
     position: absolute;
-    margin-right: 8px;
     width: 17px;
     height: 17px;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
+
+    @media(max-width: 480px) {
+      top: 4px;
+    }
   }
 
   .text {

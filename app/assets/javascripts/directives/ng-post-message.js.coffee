@@ -20,5 +20,6 @@ directives.directive("ngPostMessage", (postsAPI) ->
       checked = $this.is(":checked")
       $this.closest("label").toggleClass("checked", checked)
       postsAPI.checkBox(post, $this.data("id"), checked).success($.noop)
+      null
     )
 )
