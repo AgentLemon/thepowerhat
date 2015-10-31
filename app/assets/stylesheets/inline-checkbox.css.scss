@@ -1,0 +1,30 @@
+.inline-checkbox {
+  display: block;
+  margin-top: 5px;
+  background-color: #effaff;
+  border: solid 1px #dfeaef;
+  padding: 2px 7px 3px 7px;
+  cursor: pointer;
+  font-weight: normal;
+  position: relative;
+
+  &.checked {
+    background-color: #cfffda;
+    border-color: #bfdfca;
+  }
+
+  input {
+    top: 2px;
+    display: inline-block;
+    position: absolute;
+    margin-right: 8px;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+  }
+
+  .text {
+    display: inline-block;
+    margin-left: 24px;
+  }
+}

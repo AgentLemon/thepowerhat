@@ -56,5 +56,19 @@ services.factory("postsAPI", function($http) {
     }));
   };
 
+  postsAPI.checkBox = function(post, checkboxId, value) {
+    return $.HttpDecorator($http({
+      method: "PUT",
+      url: "/posts/" + post.id + ".json",
+      data: {
+        post: {
+          checkboxes_attributes: [
+            { id: checkboxId, value: value }
+          ]
+        }
+      }
+    }));
+  };
+
   return postsAPI;
 });

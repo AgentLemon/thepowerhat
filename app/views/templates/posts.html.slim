@@ -19,7 +19,7 @@
     a.post-edit-link.btn.btn-warning.btn-sm href="{{post.url}}"
       i.fa.fa-pencil
     .post-body
-      .post-message ng-bind-html="post.message"
+      .post-message ng-post-message="post"
 
     .attachments-wrap ng-if="(post.securedMessages.length + post.images.length) > 0"
       .separator-line

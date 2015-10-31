@@ -18,17 +18,16 @@ $( ->
   )
 
   scrollWindow = (px) ->
-    if window.scrollY != 0
-      window.scrollBy(0, px)
+    window.scrollBy(0, px)
     $(document).trigger('scroll')
 
   loadingOn = ->
     $('.loading-global').show()
-    scrollWindow(-20)
+    scrollWindow(20)
 
   loadingOff = ->
     $('.loading-global').hide()
-    scrollWindow(20)
+    scrollWindow(-20)
 
   appendMessage = (type, message) ->
     $message = $('<div class="message"/>').addClass(type).html(message)

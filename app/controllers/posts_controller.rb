@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   respond_to :html, :json
 
   before_filter :render_markup_if_html, except: [:destroy]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :checkbox]
 
   PAGE_SIZE = 10
 
@@ -61,6 +61,7 @@ class PostsController < ApplicationController
   def post_params
     params[:post][:images_attributes] ||= []
     params[:post][:secured_messages_attributes] ||= []
+    params[:post][:checkboxes_attributes] ||= []
     params.require(:post).permit(
       :message,
       :title,
@@ -73,6 +74,10 @@ class PostsController < ApplicationController
         :id,
         :message,
         :key
+      ],
+      checkboxes_attributes: [
+        :id,
+        :value
       ]
     )
   end

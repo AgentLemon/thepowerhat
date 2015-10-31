@@ -1,6 +1,8 @@
 ThePowerHat::Application.routes.draw do
 
-  resources :posts
+  resources :posts do
+    put :checkbox, on: :member
+  end
 
   resources :secured_messages, only: [:show]
 
