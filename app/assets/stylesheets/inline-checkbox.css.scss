@@ -16,7 +16,7 @@
   }
 
   input {
-    top: 6px;
+    top: 4px;
     display: inline-block;
     position: absolute;
     width: 17px;
@@ -24,10 +24,6 @@
     cursor: pointer;
     margin: 0;
     padding: 0;
-
-    @media(max-width: 480px) {
-      top: 4px;
-    }
   }
 
   .text {
