@@ -226,7 +226,7 @@ textarea {
 }
 
 .item-container {
-  padding: 20px;
+  padding: 10px 20px;
   &.with-bottom-line {
     border-bottom: solid 1px #ddd;
   }
@@ -373,11 +373,12 @@ textarea {
   }
 
   .post-edit-link {
-    color: inherit;
-    text-decoration: inherit;
+    float: right;
+    position: relative;
+    top: -10px;
+    opacity: 0.7;
     &:hover {
-      color: inherit;
-      text-decoration: inherit;
+      opacity: 1;
     }
   }
 

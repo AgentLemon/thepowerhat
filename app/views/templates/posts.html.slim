@@ -16,9 +16,8 @@
 
 .item-container.with-bottom-line ng-repeat="post in posts"
   .post-wrap
-    = link_to "{{post.url}}", class: "post-edit-link" do
-      .post-title
-        | {{post.title}}
+    a.post-edit-link.btn.btn-warning.btn-sm href="{{post.url}}"
+      i.fa.fa-pencil
     .post-body
       .post-message ng-bind-html="post.message"
 

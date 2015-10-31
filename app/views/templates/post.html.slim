@@ -6,10 +6,6 @@
       ul
         li ng-repeat="msg in errorMessages" ng-bind-html="msg"
 
-    .form-group
-      .input-with-label-wrap
-        = label_tag :title, "Title"
-        = text_field_tag :title, "", class: "form-control", placeholder: "Enter a title", autocomplete: "off", "ng-model" => "post.title"
     .form-group ng-class="{ 'has-error': errors.message }"
       .input-with-label-wrap
         = label_tag :message, "Message"
