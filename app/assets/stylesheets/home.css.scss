@@ -327,6 +327,9 @@ textarea {
     font-size: 13pt;
     word-wrap: break-word;
     .post-message {
+      p {
+        margin-top: 15px;
+      }
       .code-container {
         position: relative;
         border: dashed 1px #ddd;
@@ -376,6 +379,10 @@ textarea {
       color: inherit;
       text-decoration: inherit;
     }
+  }
+
+  .message {
+    font-family: consolas, inconsolata, courier, monospace;
   }
 }
 
